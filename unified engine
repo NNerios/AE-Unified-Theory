@@ -1,0 +1,104 @@
+import numpy as np
+
+# =====================================================================
+# THE UNIFIED MATERIAL DISPLACEMENT PARADIGM (v5.0.0 KINETIC IGNITION)
+# =====================================================================
+
+class ZeroUnifiedEngine:
+    def __init__(self, rho_max=1.0e5):
+        """
+        Unified Core Engine v5.0.0.
+        Integrates Quantum Vacuum Creation and Angular Momentum Vorticity 
+        to model the smooth crunch-to-bang phase transition without point singularities.
+        """
+        # 🪐 Consolidated Reference Baselines at z=0
+        self.Omega_b = 0.0493     
+        self.Omega_gamma = 5.4e-5 
+        
+        # Combined Material Invariant
+        self.Omega_material_0 = self.Omega_b + self.Omega_gamma
+        self.Omega_fluid_0 = 1.0 - self.Omega_material_0 
+        
+        self.rho_max = rho_max    
+
+        # 🌀 Fully Consolidated Dynamic Knobs
+        self.alpha_0 = 0.6277       # Master Material Decay / Exchange Rate
+        self.xi_vacuum = 1.7300     # Consolidated Substrate Capacitance Exponent
+        self.H0_calibration = 62.37 # Expansion scale factor
+        
+        # ⚡ New Phase Transition Knobs (Options 3 & 4)
+        self.omega_vorticity_0 = 0.05  # Initial rotational shear / twist constant
+        self.creation_efficiency = 0.12 # Scale factor for quantum vacuum particle generation
+
+    def calculate_phase_rebound(self, rho_total):
+        """
+        Option 1: Dynamic Equation of State Transition.
+        Forces the cosmos to smoothly bounce as total density approaches rho_max.
+        """
+        if rho_total >= self.rho_max:
+            return 0.0
+        # Rebound damping factor that scales down smoothly to zero at absolute compression limit
+        return 1.0 - (rho_total / self.rho_max) ** 2
+
+    def compute_hubble_squared(self, redshift):
+        """
+        Calculates global expansion via an advanced fluid loop with particle creation and vorticity.
+        """
+        xi_macro = np.log(1.0 + redshift)
+        alpha_dynamic = self.alpha_0 * (1.0 + xi_macro * 0.02)
+        xi_dynamic = self.xi_vacuum * (1.0 + xi_macro * 0.01)
+        
+        # Step 1: Material Mix tracking across lookback time
+        effective_exponent = 3.0 + (self.Omega_gamma / self.Omega_material_0) - alpha_dynamic
+        rho_material = self.Omega_material_0 * (1.0 + redshift) ** effective_exponent
+        
+        # Step 2: Background Substrate response directly from the Material State
+        g_vortex = alpha_dynamic * rho_material
+        rho_fluid = self.Omega_fluid_0 * (1.0 + redshift) ** xi_dynamic * (1.0 + g_vortex)
+        
+        # Step 3: Inject Options 3 & 4 (Vacuum Micro-Creation and Spin Friction)
+        # Quantum Vacuum Generation Pressure (Negative pressure opposes ultimate collapse)
+        p_generation = - (self.creation_efficiency * rho_fluid * (1.0 + redshift)) / 3.0
+        
+        # Gravitational Churning & Twisting Vorticity Term (Centrifugal expansion assistance)
+        vorticity_shear = self.omega_vorticity_0 * (1.0 + redshift) ** 2
+        
+        # System Synthesis (Total energetic density of the soup)
+        rho_total = rho_material + rho_fluid + np.abs(p_generation)
+        
+        # Apply the Non-Singular Phase Rebound factor
+        rebound_factor = self.calculate_phase_rebound(rho_total)
+        
+        # Core Expansion Engine: Combines density, vorticity boost, and the rebound limit
+        hubble_pure = (rho_total + 2.0 * vorticity_shear) * rebound_factor
+        
+        return max(hubble_pure, 0.0)
+
+    def execute_unified_diagnostic(self):
+        print("="*85)
+        print("         zÆro V5.0.0 MONOLITH: KINETIC IGNITION & LIQUID REBOUND")
+        print("="*85)
+        print(" Redshift (z) | Material Dens. | Substrate Dens. | Vorticity Shear | Bounded H(z)^2")
+        print("-"*85)
+        
+        test_redshifts = [0.0, 0.5, 1.0, 2.0, 5.0, 10.0, 100.0]
+        for z in test_redshifts:
+            xi_macro = np.log(1.0 + z)
+            alpha_dynamic = self.alpha_0 * (1.0 + xi_macro * 0.02)
+            xi_dynamic = self.xi_vacuum * (1.0 + xi_macro * 0.01)
+            
+            eff_exp = 3.0 + (self.Omega_gamma / self.Omega_material_0) - alpha_dynamic
+            rho_mat = self.Omega_material_0 * (1.0 + z) ** eff_exp
+            
+            g_vortex = alpha_dynamic * rho_mat
+            rho_flu = self.Omega_fluid_0 * (1.0 + z) ** xi_dynamic * (1.0 + g_vortex)
+            
+            vorticity_shear = self.omega_vorticity_0 * (1.0 + z) ** 2
+            h2 = self.compute_hubble_squared(z)
+            
+            print(f"  z = {z:<5.1f}   |    {rho_mat:<11.4f} |   {rho_flu:<13.4f} |     {vorticity_shear:<11.4f} |   {h2:.4f}")
+        print("="*85)
+
+if __name__ == "__main__":
+    engine = ZeroUnifiedEngine()
+    engine.execute_unified_diagnostic()
