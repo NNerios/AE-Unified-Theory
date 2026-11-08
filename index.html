@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zÆro V5.3.0 Dashboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .container {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        h2 { color: #38bdf8; margin-top: 0; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
+        input {
+            width: 100%;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            color: #fff;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background-color: #0369a1; }
+        .results {
+            margin-top: 20px;
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #38bdf8;
+        }
+        .metric { margin-bottom: 8px; font-size: 15px; }
+        .metric span { font-family: monospace; color: #38bdf8; float: right; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>zÆro V5.3.0 Engine Box</h2>
+    
+    <div class="input-group">
+        <label for="redshift">Target Redshift (z):</label>
+        <input type="number" id="redshift" value="1100" step="any">
+    </div>
+    
+    <button onclick="runEngine()">Execute Fluid Diagnostic</button>
+    
+    <div class="results" id="outputBox">
+        <div class="metric">Status: <span style="color: #64748b;">Awaiting Execution</span></div>
+    </div>
+</div>
+
+<script>
+function runEngine() {
+    // 🪐 1. Pure Fluid Base Parameters & Constants
+    const z = parseFloat(document.getElementById('redshift').value);
+    if (isNaN(z) || z < 0) {
+        alert("Please enter a valid positive redshift.");
+        return;
+    }
+
+    const Omega_b = 0.0493;
+    const Omega_gamma = 5.4e-5;
+    const Omega_material_0 = Omega_b + Omega_gamma;
+    const Omega_fluid_0 = 1.0 - Omega_material_0;
+    const rho_max = 1.0e15;
+
+    const alpha_0 = 0.6277;
+    const xi_vacuum = 1.7300;
+    const omega_vorticity_0 = 0.005;
+    const creation_efficiency = 0.015;
+    const H0_km_s_Mpc = 67.4;
+
+    // STAGE 1: Pure Fluid Calculations
+    const xi_macro = Math.log(1.0 + z);
+    const alpha_dynamic = alpha_0 * (1.0 + xi_macro * 0.02);
+    const xi_dynamic = xi_vacuum * (1.0 + xi_macro * 0.01);
+
+    const effective_exponent = 3.0 + (Omega_gamma / Omega_material_0) - alpha_dynamic;
+    const rho_material = Omega_material_0 * Math.pow(1.0 + z, effective_exponent);
+
+    const g_vortex = alpha_dynamic * rho_material;
+    const rho_fluid = Omega_fluid_0 * Math.pow(1.0 + z, xi_dynamic) * (1.0 + g_vortex);
+
+    const p_generation = - (creation_efficiency * rho_fluid * (1.0 + z)) / 3.0;
+
+    let vorticity_shear = omega_vorticity_0 * Math.pow(1.0 + z, 2);
+    if (z > 5000.0) {
+        const thermal_evaporation_rate = 1.0 + Math.log10(z / 5000.0);
+        vorticity_shear *= thermal_evaporation_rate;
+    }
+
+    const rho_total = rho_material + rho_fluid + Math.abs(p_generation);
+    
+    let rebound_factor = 1.0 - Math.pow(rho_total / rho_max, 2);
+    if (rho_total >= rho_max) rebound_factor = 0.0;
+
+    let f_sub_squared = (rho_total + 2.0 * vorticity_shear) * rebound_factor;
+    if (f_sub_squared < 0) f_sub_squared = 0.0;
+
+    // STAGE 2: Explicit Downstream Conversion
+    const hubble_translated = H0_km_s_Mpc * Math.sqrt(f_sub_squared);
+
+    // Render Output
+    const systemStatus = f_sub_squared === 0 ? "Liquid Rebound" : (z > 5000 ? "Thermal Evaporation" : "Stable Expansion");
+    const statusColor = f_sub_squared === 0 ? "#ef4444" : (z > 5000 ? "#f59e0b" : "#10b981");
+
+    document.getElementById('outputBox').innerHTML = `
+        <div class="metric">System Status: <span style="color: ${statusColor}; font-weight:bold;">${systemStatus}</span></div>
+        <div class="metric">Material Density: <span>${rho_material.toExponential(4)}</span></div>
+        <div class="metric">Substrate Density: <span>${rho_fluid.toExponential(4)}</span></div>
+        <div class="metric">Vorticity Shear: <span>${vorticity_shear.toExponential(4)}</span></div>
+        <div class="metric">Raw Bounded H(z)²: <span>${f_sub_squared.toExponential(4)}</span></div>
+        <div class="metric" style="margin-top:10px; border-top:1px solid #475569; padding-top:10px; font-weight:bold;">
+            Converted H(z): <span style="color:#38bdf8;">${hubble_translated.toFixed(4)} km/s/Mpc</span>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
