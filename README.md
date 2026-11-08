@@ -1,3 +1,17 @@
+Built cut and paste pydroid3 apk
+
+The AE-Unified-Theory repository contains a Python implementation of the Unified Material Displacement Paradigm, a non-singular cosmological framework designed as an alternative to Lambda-CDM by modeling the universe through an integrated two-component fluid loop: the Material Mix and the Vacuum Substrate.
+
+Key Framework Highlights
+Core Physics Foundations: Treats space-time as a physical fluid continuum to address issues like the Hubble Tension and Vacuum Catastrophe. It relies on four mechanisms: the Axiom of the Substrate, Non-Singular Fluid Boundaries (capping density at \(\rho_{max} = 1.0 \times 10^{15}\text{ kg/m}^3\) to prevent \(R \to 0\) singularities), Quantum Vacuum Generation driven by gravitational shear (\(P_{gen}\)), and Rotational Vorticity (\(w^{2}\)) for kinetic ignition.
+Two-Stage Peer-Review Audit: Separates calculations into a pure fluid engine (compute_raw_fluid_density_and_frequency) operating without baseline knowledge of standard astronomical units, and an explicit downstream conversion layer (convert_to_astrophysical_hubble) mapping raw bounded fluid frequency squared (\(f_{sub}^{2}\)) into \(\text{km/s/Mpc}\) via scalar conversion.
+Variable & Equation Registry: Details thermodynamic/density variables (\(\rho_{total}, \rho_m, \rho_f, \rho_{max}\)), kinetic/dynamic exchange operators (\(\alpha(z), \alpha_0, \xi(z), \xi_{vacuum}, \xi_{macro}\)), vacuum generation/vorticity fields (\(P_{gen}, \text{efficiency}, \omega^2(z), \omega_0^2, \text{Evaporation Boost}\)), and boundary control operators (\(\Pi_{bounce}, f_{sub}^2, H_0\)).
+Theoretical Hypothesis Summary: Outlines a 5-module hypothesis spanning substrate postulates, governing dimensional equations, the rebound engine, observational triumphs (resolving the Hubble tension and vacuum catastrophe), and the final cosmological vector conclusion.
+Verification Matrix: Provides benchmark metrics verifying system stability across the Modern Era (\(z = 0.0\)), the CMB Recombination Horizon (\(z = 1100.0\)), and the Primordial Compression Limit (\(z \ge 10000.0\)).
+
+The full documentation, complete equations, and source code can be reviewed directly in the AE-Unified-Theory GitHub Repository.
+
+
 # AE-Unified-Theory
 the cer through zÆro to the full AE (Æ) model compiled into one singular pydroid3 unit.model fully 
 
