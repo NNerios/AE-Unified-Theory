@@ -105,3 +105,54 @@ By replacing the abstract dark energy fluid and dark matter particles with a sin
 
 Observational FrontierLambda-CDM BaselinezÆro Fluid CosmosCosmic Microwave Background (z = 1100)Requires fine-tuning an unobserved dark energy parameter to fit the data.Perfect Match. Substrate capacitance scales naturally to match raw acoustic peaks.Local Expansion Rates (z < 1)Forces a direct mathematical contradiction (Hubble Tension).Resolved. Dynamic outgassing naturally bridges the 67.4 to 73.0 gap.The Deep Primordial Era (z → High)Crashes completely into a physical point-singularity (H² → ∞).Smooth Transition. Hits the \(\rho _{max}\) wall and executes a clean, non-singular bounce.
 
+
+# AE-Unified-Theory: The zÆro Cosmological Fluid Engine
+
+An implementation of the **Unified Material Displacement Paradigm**, a non-singular cosmological alternative to Lambda-CDM. This framework collapses separate matter, radiation, and dark sector equations into an integrated two-component fluid loop: the **Material Mix** and the **Vacuum Substrate**.
+
+Developed as a compact, self-contained Python architecture, the engine computes pure cosmological fluid densities and kinematic frequencies across deep lookback times without relying on an immutable cosmological constant ($\Lambda$) or incurring mathematical singularity penalties.
+
+---
+
+## 🔬 Core Physics Foundations
+
+The zÆro model treats space-time as a tangible physical substance possessing intrinsic surface tension, viscous shear, and mass-energy capacitance. The framework resolves the core failures of modern astrophysics (the Hubble Tension and the Vacuum Catastrophe) through four primary mechanisms:
+
+1. **The Axiom of the Substrate:** Space is modeled as a continuous, self-interacting kinematic fluid continuum where energy-density is actively exchanged via coupled conservation loops.
+2. **Non-Singular Fluid Boundaries:** Point singularities ($R \to 0$) are avoided by implementing a maximum density threshold ($\rho_{max}$). As density peaks, the equation of state shifts dynamically to $w \to -1$, creating an absolute mechanical wall that triggers a smooth liquid rebound.
+3. **Quantum Vacuum Generation:** Virtual-to-real particle micro-creation is continuously driven by extreme gravitational shear beyond the micro-scale of nothingness to existence, populating the cosmic soup with permanent matter and localized gravity.
+4. **Vorticity and Kinetic Ignition:** Local density fluctuations undergo gravitational twisting, introducing an Angular Momentum and Vorticity Tensor ($\omega^2$) into the core loop. This churning generates extreme kinetic friction, triggering a violent thermal phase transition ("primordial ignition") and post-bounce inflationary thermal evaporation.
+
+---
+
+## 🛡️ The Two-Stage Peer-Review Audit
+
+To maintain complete transparency and eliminate bias or parameter "cooking," the codebase is divided into two entirely separate, isolated computational pipelines:
+
+### Stage 1: The Pure Fluid Engine (`compute_raw_fluid_density_and_frequency`)
+* Evaluates the continuous coupled equations governing the primary fluid mass-density ($\rho_f$) and the material mass-density ($\rho_m$).
+* Injects continuous quantum vacuum creation pressure ($P_{gen}$) and centrifugal vorticity shear ($2\omega^2$).
+* Operates in pure fluid continuums with **zero** baseline knowledge of standard astronomical units or Lambda-CDM dimensions.
+
+### Stage 2: The Explicit Downstream Conversion (`convert_to_astrophysical_hubble`)
+* Isolates the translation layer.
+* Takes the raw bounded fluid frequency squared ($f_{sub}^2$) and maps it explicitly into standard astrophysical units ($\text{km/s/Mpc}$) via a transparent downstream scalar conversion formula.
+* Allows independent reviewers to inspect the conversion pathway step-by-step, ensuring no numbers are manipulated to artificially force observational alignment.
+
+---
+
+## 🛠️ Code Architecture & Execution
+
+The core system is optimized to run as a monolithic engine, completely compatible with mobile Python environments like **Pydroid 3** or standard desktop distributions.
+
+### Operational Parameters
+* `rho_max = 1.0e15`: Maximum volumetric energy-density threshold governing the absolute liquid bounce boundary.
+* `alpha_0 = 0.6277`: Universal material decay and outgassing feedback factor.
+* `xi_vacuum = 1.7300`: Dynamic substrate capacitance index.
+* `omega_vorticity_0 = 0.005`: Scales rotational fluid shear and friction.
+* `creation_efficiency = 0.015`: Controls the rate of quantum vacuum particle outgassing.
+
+---
+
+## 📜 License
+This repository is licensed under the MIT License. Feel free to fork, experiment, and audit the fluid calculations.
